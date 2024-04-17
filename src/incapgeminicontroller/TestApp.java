@@ -46,51 +46,46 @@ public class TestApp {
 
     private static void updateStudent() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the UID to be updated");
+        System.out.println("Enter Student UID to be updated::");
         int studentUID = scanner.nextInt();
         scanner.nextLine();
         IStudentService studentService = StudentServiceFactory.getStudentService();
         Student student = studentService.selectStudent(studentUID);
         if (student.getStudentUID() != null) {
             Student newStudent = new Student();
-
-            System.out.println("Student UID is: " + student.getStudentUID());
-
-            System.out.println("Student old Name: " + student.getStudentName() + "\n" + "Enter new Name: ");
-            String newName = scanner.nextLine();
-            if (newName.trim().isEmpty()) {
+            System.out.println("Student UID is::" + student.getStudentUID());
+            newStudent.setStudentUID(student.getStudentUID());
+            System.out.println("Student old name is::" + student.getStudentName() + "Enter new name::");
+            String newName = scanner.next();
+            if (newName.endsWith("") || newName == "") {
                 newStudent.setStudentName(student.getStudentName());
             } else {
                 newStudent.setStudentName(newName);
             }
-
-            System.out.println("Student old Course: " + student.getStudentCourse() + "\n" + "Enter new Course: ");
-            String newCourse = scanner.nextLine();
-            if (newCourse.trim().isEmpty()) {
+            System.out.println("Student old course is::" + student.getStudentCourse() + "Enter new course::");
+            String newCourse = scanner.next();
+            if (newCourse.endsWith("") || newCourse == "") {
                 newStudent.setStudentCourse(student.getStudentCourse());
             } else {
                 newStudent.setStudentCourse(newCourse);
             }
 
-            System.out.println("Student old Batch: " + student.getStudentBatch() + "\n" + "Enter new Batch: ");
+            System.out.println("Student old batch is::" + student.getStudentBatch() + "Enter new batch::");
             int newBatch = scanner.nextInt();
-            scanner.nextLine();
             if (newBatch == 0) {
                 newStudent.setStudentBatch(student.getStudentBatch());
             } else {
                 newStudent.setStudentBatch(newBatch);
             }
-
             String status = studentService.updateStudent(newStudent);
             if (status.equalsIgnoreCase("success")) {
                 System.out.println("Record updated successfully");
-                System.out.println("StudentUID \tStudentName\t StudentCourse\t StudentBatch");
-                System.out.println(newStudent.getStudentUID() + "\t\t" + newStudent.getStudentName() + "\t\t"
-                        + newStudent.getStudentCourse() + "\t\t" + newStudent.getStudentBatch());
             } else {
-                System.out.println("Record updation failed ");
+                System.out.println("Record updation failed");
             }
+
         }
+
     }
 
     private static void deleteStudent() {

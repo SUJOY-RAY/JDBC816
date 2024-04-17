@@ -4,18 +4,18 @@ import incapgeminiservice.IStudentService;
 import incapgeminiservice.StudentServiceImpl;
 
 public class StudentServiceFactory {
-    private static IStudentService studentService=null;
+    private static IStudentService studentService = null;
 
-    private StudentServiceFactory(){
+    private StudentServiceFactory() {
 
     }
 
-    public static IStudentService getStudentService(){
-        if (studentService==null) {
-            studentService=new StudentServiceImpl();
-            
+    public static IStudentService getStudentService() {
+        if (studentService == null) {
+            studentService = new StudentServiceImpl();
+
         }
         return studentService;
-    }   
+    }
 
 }

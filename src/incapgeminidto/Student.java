@@ -3,7 +3,7 @@ package incapgeminidto;
 import java.io.Serializable;
 
 public class Student implements Serializable {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
     private Integer StudentUID;
     private String StudentName;
     private String StudentCourse;
@@ -40,8 +40,9 @@ public class Student implements Serializable {
     public void setStudentBatch(Integer StudentBatch) {
         this.StudentBatch = StudentBatch;
     }
-    
-    public String toString(){
-        return "Student [studentUID="+StudentUID+",studentName="+StudentName+",studentCourse="+StudentCourse+", StudentBatch="+StudentBatch+"]";
+
+    public String toString() {
+        return "Student [studentUID=" + StudentUID + ",studentName=" + StudentName + ",studentCourse=" + StudentCourse
+                + ", StudentBatch=" + StudentBatch + "]";
     }
 }
