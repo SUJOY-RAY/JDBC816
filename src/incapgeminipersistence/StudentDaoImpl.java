@@ -26,7 +26,6 @@ public class StudentDaoImpl implements IStudentDAO {
             try {
                 psmt = connection.prepareStatement(sqlInsertQuery);
             } catch (SQLException e) {
-
                 e.printStackTrace();
             }
             if (psmt != null) {

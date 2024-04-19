@@ -36,58 +36,67 @@ public class TestApp {
                     break;
                 case 5:
                     System.out.println("Exiting...");
-                    scanner.close(); // Close scanner before exiting
-                    System.exit(0); // Exit the program
+                    scanner.close(); 
+                    System.exit(0); 
                 default:
                     System.out.println("Invalid choice. Please enter a number between 1 and 5.");
             }
         }
     }
 
+    
     private static void updateStudent() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter Student UID to be updated::");
+        System.out.println("Enter Student UID to be updated:");
         int studentUID = scanner.nextInt();
         scanner.nextLine();
+        
         IStudentService studentService = StudentServiceFactory.getStudentService();
         Student student = studentService.selectStudent(studentUID);
+        
         if (student.getStudentUID() != null) {
             Student newStudent = new Student();
-            System.out.println("Student UID is::" + student.getStudentUID());
             newStudent.setStudentUID(student.getStudentUID());
-            System.out.println("Student old name is::" + student.getStudentName() + "Enter new name::");
-            String newName = scanner.next();
-            if (newName.endsWith("") || newName == "") {
-                newStudent.setStudentName(student.getStudentName());
-            } else {
+            
+            System.out.println("Student UID is: " + student.getStudentUID());
+            
+            System.out.println("Student old name is: " + student.getStudentName() + " Enter new name:");
+            String newName = scanner.nextLine();
+            if (!newName.isEmpty()) {
                 newStudent.setStudentName(newName);
-            }
-            System.out.println("Student old course is::" + student.getStudentCourse() + "Enter new course::");
-            String newCourse = scanner.next();
-            if (newCourse.endsWith("") || newCourse == "") {
-                newStudent.setStudentCourse(student.getStudentCourse());
             } else {
+                newStudent.setStudentName(student.getStudentName());
+            }
+            
+            System.out.println("Student old course is: " + student.getStudentCourse() + " Enter new course:");
+            String newCourse = scanner.nextLine();
+            if (!newCourse.isEmpty()) {
                 newStudent.setStudentCourse(newCourse);
-            }
-
-            System.out.println("Student old batch is::" + student.getStudentBatch() + "Enter new batch::");
-            int newBatch = scanner.nextInt();
-            if (newBatch == 0) {
-                newStudent.setStudentBatch(student.getStudentBatch());
             } else {
-                newStudent.setStudentBatch(newBatch);
+                newStudent.setStudentCourse(student.getStudentCourse());
             }
+    
+            System.out.println("Student old batch is: " + student.getStudentBatch() + " Enter new batch:");
+            int newBatch = scanner.nextInt();
+            if (newBatch != 0) {
+                newStudent.setStudentBatch(newBatch);
+            } else {
+                newStudent.setStudentBatch(student.getStudentBatch());
+            }
+            
             String status = studentService.updateStudent(newStudent);
             if (status.equalsIgnoreCase("success")) {
                 System.out.println("Record updated successfully");
             } else {
                 System.out.println("Record updation failed");
             }
-
+        } else {
+            System.out.println("Record not found for the given Student UID: " + studentUID);
         }
-
     }
+    
 
+    
     private static void deleteStudent() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter Student UID");
